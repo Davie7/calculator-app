@@ -11,6 +11,10 @@ class Button extends StatelessWidget {
       required this.buttonColor,
       required this.textColor});
 
+  void buttonPressed(String buttonText){
+    print('$buttonText');
+  }
+
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
@@ -23,7 +27,9 @@ class Button extends StatelessWidget {
         shape: CircleBorder(),
         backgroundColor: buttonColor,
       ),
-      onPressed: () {},
+      onPressed: () {
+        return buttonPressed(buttonText);
+      },
     );
   }
 }

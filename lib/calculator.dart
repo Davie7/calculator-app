@@ -69,15 +69,15 @@ class _CalculatorState extends State<Calculator> {
               children: [
                 Button(
                     buttonText: '7',
-                    buttonColor: Colors.grey,
+                    buttonColor: Colors.grey[850]!,
                     textColor: Colors.white),
                 Button(
                     buttonText: '8',
-                    buttonColor: Colors.grey,
+                    buttonColor: Colors.grey[850]!,
                     textColor: Colors.white),
                 Button(
                     buttonText: '9',
-                    buttonColor: Colors.grey,
+                    buttonColor: Colors.grey[850]!,
                     textColor: Colors.white),
                 Button(
                     buttonText: '-',
@@ -93,15 +93,15 @@ class _CalculatorState extends State<Calculator> {
               children: [
                 Button(
                     buttonText: '4',
-                    buttonColor: Colors.grey,
+                    buttonColor: Colors.grey[850]!,
                     textColor: Colors.white),
                 Button(
                     buttonText: '5',
-                    buttonColor: Colors.grey,
+                    buttonColor: Colors.grey[850]!,
                     textColor: Colors.white),
                 Button(
                     buttonText: '6',
-                    buttonColor: Colors.grey,
+                    buttonColor: Colors.grey[850]!,
                     textColor: Colors.white),
                 Button(
                     buttonText: '+',
@@ -117,15 +117,15 @@ class _CalculatorState extends State<Calculator> {
               children: [
                 Button(
                     buttonText: '1',
-                    buttonColor: Colors.grey,
+                    buttonColor: Colors.grey[850]!,
                     textColor: Colors.white),
                 Button(
                     buttonText: '2',
-                    buttonColor: Colors.grey,
+                    buttonColor: Colors.grey[850]!,
                     textColor: Colors.white),
                 Button(
                     buttonText: '3',
-                    buttonColor: Colors.grey,
+                    buttonColor: Colors.grey[850]!,
                     textColor: Colors.white),
                 Button(
                     buttonText: '=',
@@ -141,21 +141,70 @@ class _CalculatorState extends State<Calculator> {
               children: [
                 Button(
                     buttonText: '0',
-                    buttonColor: Colors.grey,
+                    buttonColor: Colors.grey[850]!,
                     textColor: Colors.white),
                 Button(
                     buttonText: '.',
-                    buttonColor: Colors.grey,
+                    buttonColor: Colors.grey[850]!,
                     textColor: Colors.white),
-                Button(
-                    buttonText: '3',
-                    buttonColor: Colors.grey,
-                    textColor: Colors.white),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 10, 50, 10),
+                    child: Text(
+                      'Clear',
+                      style: TextStyle(fontSize: 28),
+                    ),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    shape: StadiumBorder(),
+                    backgroundColor: Colors.blue,
+                  ),
+                ),
               ],
             ),
           ],
         ),
       ),
     );
+  }
+
+  // The logic of the calculator
+  double firstNumber = 0;
+  double secondNumber = 0;
+  String result = '';
+  String text = '';
+  String operand = '';
+
+  void calculate(String buttonText) {
+    if (buttonText == 'C') {
+      firstNumber = 0;
+      secondNumber = 0;
+      result = '';
+      text = '';
+    } else if (buttonText == '+' ||
+        buttonText == '-' ||
+        buttonText == '/' ||
+        buttonText == 'x') {
+      firstNumber = double.parse(text);
+      result = '';
+      operand = buttonText;
+    } else if (buttonText == '=') {
+      secondNumber = double.parse(text);
+      if (operand == '+') {
+        result = (firstNumber + secondNumber).toString();
+      }
+      if (operand == '-') {
+        result = (firstNumber - secondNumber).toString();
+      }
+      if (operand == 'x') {
+        result = (firstNumber * secondNumber).toString();
+      }
+      if (operand == '/') {
+        result = (firstNumber / secondNumber).toString();
+      }
+    } else {
+      result = (text + buttonText).toString();
+    }
   }
 }
